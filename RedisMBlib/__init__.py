@@ -12,10 +12,15 @@ class LogSeverity():
 class RedisMB():
     def __init__(self, data = None):
         if data is not None:
-            self.r = redis.Redis(data["redis_host"], port=data["redis_port"], db=data["redis_db"])
+            host = data["REDIS_HOST"]
+            port = data["REDIS_PORT"]
+            db = data["REDIS_DB"]
         else:
-            self.r = redis.Redis(os.getenv('redis_host', '127.0.0.1'), port=os.getenv('redis_port', 6379),
-                        db=os.getenv('redis_db', 0))
+            host = os.getenv('REDIS_HOST', '127.0.0.1')
+            port = os.getenv('REDIS_PORT', 6379)
+            db = os.getenv('REDIS_DB', 0)
+        print("Connect to Redis DB on {}:{} DB: {}".format(host, port, db))
+        self.r = redis.Redis(host, port=port, db=db)
     def _publish_message(self, queue, message):
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)
         self.r.publish(queue, message)
@@ -27,6 +32,7 @@ class RedisMB():
     def errorZVEI(self, zvei):
         message = {"type": "error_zvei", "zvei": zvei}
         self._publish_message("error_zvei", message)
+
 
 
 
