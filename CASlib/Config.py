@@ -4,7 +4,7 @@ import json
 class Config():
     def __init__(self):
         try:
-            with open("config.json") as config_file:
+            with open("/opt/config.json") as config_file:
                 try:
                     config = json.load(config_file)
                 except Exception as e:
