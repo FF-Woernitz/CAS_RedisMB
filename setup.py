@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="RedisMBlib", # Replace with your own username
+    name="CAS_lib",
     version="0.0.1",
     author="FF Woernitz",
     author_email="technik@www.ff-woernitz.de",
