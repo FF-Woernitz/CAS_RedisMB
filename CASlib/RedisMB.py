@@ -1,7 +1,10 @@
 import redis, os, json
+from . import Logger
 
 class RedisMB():
     def __init__(self, data = None):
+        self.logger = Logger.Logger(self.__name__).getLogger()
+
         if data is not None:
             host = data["REDIS_HOST"]
             port = data["REDIS_PORT"]
@@ -10,7 +13,7 @@ class RedisMB():
             host = os.getenv('REDIS_HOST', '127.0.0.1')
             port = os.getenv('REDIS_PORT', 6379)
             db = os.getenv('REDIS_DB', 0)
-        print("Connect to Redis DB on {}:{} DB: {}".format(host, port, db))
+        self.logger.info("Connecting to Redis DB on {}:{} DB: {}".format(host, port, db))
         self.r = redis.Redis(host, port=port, db=db)
         self.p = self.r.pubsub()
         self.subthread = None
