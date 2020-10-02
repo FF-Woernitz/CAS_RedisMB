@@ -1,4 +1,0 @@
-pip~=20.2.3
-redis~=3.5.3
-Logbook~=1.5.3
-setuptools~=50.3.0

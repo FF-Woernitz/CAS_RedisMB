@@ -1,5 +1,4 @@
 import setuptools
-from pkg_resources import parse_requirements
 
 setuptools.setup(
     name="CASlib",
@@ -12,6 +11,10 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3"
     ],
-    install_reqs=parse_requirements('requirements.txt'),
+    install_reqs=
+    [
+        'redis~=3.5',
+        'Logbook~=1.5'
+    ],
     python_requires='>=3.6',
 )
