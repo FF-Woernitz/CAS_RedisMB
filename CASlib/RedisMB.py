@@ -23,15 +23,16 @@ class RedisMB():
 
     def _publish_message(self, queue, message):
         message['uuid'] = str(uuid.uuid1())
+        message['type'] = queue
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)
         self.r.publish(queue, message)
     def exit(self):
         self.r.close()
     def newZVEI(self, zvei):
-        message = {"type": "new_zvei", "zvei": zvei}
+        message = {"zvei": zvei}
         self._publish_message("new_zvei", message)
     def errorZVEI(self, zvei):
-        message = {"type": "error_zvei", "zvei": zvei}
+        message = {"zvei": zvei}
         self._publish_message("error_zvei", message)
     def subscribeToType(self, type, callback):
         self.p.subscribe(**{type: callback})
