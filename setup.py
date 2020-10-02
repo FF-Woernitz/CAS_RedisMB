@@ -1,5 +1,8 @@
 import setuptools
-from pkg_resources import parse_requirements
+
+def parse_requirements(requirements):
+    with open(requirements) as f:
+        return [l.strip('\n') for l in f if l.strip('\n') and not l.startswith('#')]
 
 setuptools.setup(
     name="CASlib",
