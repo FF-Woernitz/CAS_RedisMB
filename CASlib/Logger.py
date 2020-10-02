@@ -1,3 +1,4 @@
+import logbook
 from logbook import StreamHandler
 import sys
 
