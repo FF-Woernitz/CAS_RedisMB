@@ -14,9 +14,11 @@ class RedisMB():
             port = os.getenv('REDIS_PORT', 6379)
             db = os.getenv('REDIS_DB', 0)
         self.logger.info("Connecting to Redis DB on {}:{} DB: {}".format(host, port, db))
-        self.r = redis.Redis(host, port=port, db=db)
+        self.r = redis.Redis(host, port=port, db=db, health_check_interval=15, socket_connect_timeout=10)
         self.p = self.r.pubsub()
         self.subthread = None
+
+        self.r.ping()
 
     def _publish_message(self, queue, message):
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)

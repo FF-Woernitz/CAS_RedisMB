@@ -2,7 +2,7 @@ from datetime import datetime, time
 from pytz import timezone
 
 
-class helper():
+class Helper():
     def __init__(self):
         pass
 
