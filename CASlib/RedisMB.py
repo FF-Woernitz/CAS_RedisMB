@@ -1,5 +1,6 @@
 import redis, os, json, uuid
 from . import Logger
+from pprint import pprint
 
 class RedisMB():
     def __init__(self, data = None):
@@ -24,7 +25,9 @@ class RedisMB():
     def _publish_message(self, queue, message):
         message['uuid'] = str(uuid.uuid1())
         message['type'] = queue
+        pprint(message)
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)
+        pprint(message)
         self.r.publish(queue, message)
     def decodeMessage(self, message):
         return json.loads(message['data'])
