@@ -26,6 +26,9 @@ class RedisMB():
         message['type'] = queue
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)
         self.r.publish(queue, message)
+    def decodeMessage(self, message):
+        return json.loads(message['data'], separators=(',', ':'))
+
     def exit(self):
         self.r.close()
     def newZVEI(self, zvei):
