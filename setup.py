@@ -12,6 +12,6 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3"
     ],
-    install_reqs=parse_requirements('requirements.txt'),
+    install_requires=parse_requirements('requirements.txt'),
     python_requires='>=3.6',
 )
