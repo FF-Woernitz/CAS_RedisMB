@@ -27,7 +27,7 @@ class RedisMB():
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)
         self.r.publish(queue, message)
     def decodeMessage(self, message):
-        return json.loads(message['data'], separators=(',', ':'))
+        return json.loads(message['data'])
 
     def exit(self):
         self.r.close()
