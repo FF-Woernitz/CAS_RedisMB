@@ -3,7 +3,7 @@ from . import Logger
 
 class RedisMB():
     def __init__(self, data = None):
-        self.logger = Logger.Logger(self.__name__).getLogger()
+        self.logger = Logger.Logger(self.__class__.__name__).getLogger()
 
         if data is not None:
             host = data["REDIS_HOST"]
