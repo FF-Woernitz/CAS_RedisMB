@@ -32,9 +32,12 @@ class RedisMB():
 
     def exit(self):
         self.r.close()
-    def newZVEI(self, zvei):
+    def inputZVEI(self, zvei):
         message = {"zvei": zvei}
-        self._publish_message("new_zvei", message)
+        self._publish_message("inputZVEI", message)
+    def alertZVEI(self, zvei):
+        message = {"zvei": zvei}
+        self._publish_message("alertZVEI", message)
     def errorZVEI(self, zvei):
         message = {"zvei": zvei}
         self._publish_message("error_zvei", message)
