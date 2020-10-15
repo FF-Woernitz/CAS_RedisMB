@@ -1,8 +1,9 @@
 import redis, os, json, uuid
 from . import Logger
 
+
 class RedisMB():
-    def __init__(self, data = None):
+    def __init__(self, data=None):
         self.logger = Logger.Logger(self.__class__.__name__).getLogger()
 
         if data is not None:
@@ -27,25 +28,35 @@ class RedisMB():
         message = json.dumps(message, separators=(',', ':'), sort_keys=True, indent=None)
         self.logger.trace("Sending redis message: {}".format(message))
         self.r.publish(queue, message)
+
     def decodeMessage(self, message):
         return json.loads(message['data'])
 
     def exit(self):
         self.r.close()
+
+    def _newZVEI(self, zvei, type):
+        message = {"zvei": zvei}
+        self._publish_message(type, message)
+
     def inputZVEI(self, zvei):
-        message = {"zvei": zvei}
-        self._publish_message("inputZVEI", message)
+        self._newZVEI(zvei, "inputZVEI")
+
     def alertZVEI(self, zvei):
-        message = {"zvei": zvei}
-        self._publish_message("alertZVEI", message)
+        self._newZVEI(zvei, "alertZVEI")
+
     def errorZVEI(self, zvei):
-        message = {"zvei": zvei}
-        self._publish_message("error_zvei", message)
+        self._newZVEI(zvei, "errorZVEI")
+
+    def testalertZVEI(self, zvei):
+        self._newZVEI(zvei, "testalertZVEI")
+
     def subscribeToType(self, type, callback):
         self.p.subscribe(**{type: callback})
         if self.subthread is None:
             self.subthread = self.p.run_in_thread(sleep_time=0.01)
         return self.subthread
+
     def psubscribeToType(self, pattern, callback):
         self.p.psubscribe(**{pattern: callback})
         if self.subthread is None:
