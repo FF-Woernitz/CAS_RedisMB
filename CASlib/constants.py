@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class LogSeverity(Enum):
     TRACE = 0
     DEBUG = 1
@@ -7,7 +8,3 @@ class LogSeverity(Enum):
     WARN = 3
     ERROR = 4
     FATAL = 5
-
-
-
-
