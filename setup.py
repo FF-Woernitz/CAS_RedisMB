@@ -5,11 +5,11 @@ def parse_requirements(requirements):
         return [l.strip('\n') for l in f if l.strip('\n') and not l.startswith('#')]
 
 setuptools.setup(
-    name="CASlib",
+    name="CASlibrary",
     version="0.0.1",
     author="FF Woernitz",
     author_email="technik@ff-woernitz.de",
-    description="The redis message borker lib used in the CAS system",
+    description="The universal lib used in the CAS system",
     url="https://github.com/FF-Woernitz/CAS_lib",
     packages=setuptools.find_packages(),
     classifiers=[
