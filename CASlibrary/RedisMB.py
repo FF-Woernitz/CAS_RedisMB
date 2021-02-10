@@ -19,26 +19,32 @@ class RedisMB:
             host = os.getenv('REDIS_HOST', '127.0.0.1')
             port = os.getenv('REDIS_PORT', 6379)
             db = os.getenv('REDIS_DB', 0)
-        self.r = redis.Redis(host, port=port, db=db, health_check_interval=15,
+        self.r = redis.Redis(host,
+                             port=port,
+                             db=db,
+                             health_check_interval=15,
                              socket_connect_timeout=10)
         self.p = self.r.pubsub(ignore_subscribe_messages=True)
         self.subthread = None
 
         self.logger.info(
-            "Connecting to Redis DB on {}:{} DB: {}".format(host, port, db))
+            "Connecting to Redis DB "
+            "on {}:{} DB: {}".format(host, port, db))
         self.r.ping()
         self.logger.info(
-            "Connected successfully to Redis DB on {}:{} DB: {}".format(host,
-                                                                        port,
-                                                                        db))
+            "Connected successfully to Redis DB "
+            "on {}:{} DB: {}".format(host, port, db))
 
     def _publish_message(self, queue, message):
-        message['uuid'] = str(uuid.uuid1())
-        message['type'] = queue
-        message = json.dumps(message, separators=(',', ':'), sort_keys=True,
-                             indent=None)
-        self.logger.trace("Sending redis message: {}".format(message))
-        self.r.publish(queue, message)
+        messageToSend = {'uuid': str(uuid.uuid1()),
+                         'type': queue,
+                         'message': message}
+        messageToSend = json.dumps(messageToSend,
+                                   separators=(',', ':'),
+                                   sort_keys=True,
+                                   indent=None)
+        self.logger.trace("Sending redis message: {}".format(messageToSend))
+        self.r.publish(queue, messageToSend)
 
     def decodeMessage(self, message):
         return json.loads(message['data'])
