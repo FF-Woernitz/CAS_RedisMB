@@ -9,7 +9,7 @@ def parse_requirements(requirements):
 
 setuptools.setup(
     name="CASlibrary",
-    version="0.2.0",
+    version="0.3.0",
     author="FF Woernitz",
     author_email="technik@ff-woernitz.de",
     description="The universal lib used in the CAS system",
