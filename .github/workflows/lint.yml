@@ -5,7 +5,6 @@ jobs:
   lint-python:
     runs-on: ubuntu-18.04
     name: Linting Python
-    continue-on-error: true
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v1
