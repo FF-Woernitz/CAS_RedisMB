@@ -1,8 +1,11 @@
 import setuptools
 
+
 def parse_requirements(requirements):
     with open(requirements) as f:
-        return [l.strip('\n') for l in f if l.strip('\n') and not l.startswith('#')]
+        return [line.strip('\n') for line in f if
+                line.strip('\n') and not line.startswith('#')]
+
 
 setuptools.setup(
     name="CASlibrary",

@@ -33,7 +33,7 @@ class Config():
 
                 for triggerGroup in config["trigger"]:
                     for trigger in triggerGroup:
-                        if not "action" in trigger or len(trigger["action"]):
+                        if "action" not in trigger or len(trigger["action"]):
                             self.logger.warn(
                                 "You have no actions defined in trigger {}."
                                 " Please check config file.".format(

@@ -1,7 +1,8 @@
 import json
 import os
-import redis
 import uuid
+
+import redis
 
 from . import Logger
 
