@@ -16,14 +16,14 @@ class Config():
                         "Failed to parse config file. {}".format(e))
 
                 if len(config["trigger"]) == 0:
-                    raise Exception(
+                    self.logger.warn(
                         "No trigger defined! Please check config file.")
 
                 triggerCount = 0
-                for triggerGroup in config["trigger"]:
+                for triggerGroup in config["trigger"].values():
                     triggerCount += len(triggerGroup)
                 if triggerCount == 0:
-                    raise Exception(
+                    self.logger.warn(
                         "No trigger defined! Please check config file.")
 
                 if len(config["action"]) == 0:
@@ -31,13 +31,20 @@ class Config():
                         "You have no actions defined."
                         " Please check config file.")
 
-                for triggerGroup in config["trigger"]:
-                    for trigger in triggerGroup:
-                        if "action" not in trigger or len(trigger["action"]):
+                for triggerGroup in config["trigger"].values():
+                    for trigger in triggerGroup.values():
+                        if "action" not in trigger or len(trigger["action"]) <= 0:
                             self.logger.warn(
                                 "You have no actions defined in trigger {}."
                                 " Please check config file.".format(
                                     trigger["name"]))
+                        else:
+                            for action in trigger["action"]:
+                                if action not in config["action"]:
+                                    self.logger.warn(
+                                        "Action {} in trigger {} is not defined."
+                                        " Please check config file.".format(
+                                            action, trigger["name"]))
 
                 self.config = config
         except OSError:
