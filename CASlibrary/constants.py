@@ -10,7 +10,7 @@ class LogSeverity(Enum):
     FATAL = 5
 
 
-class AlarmType(Enum):
+class AlertType(Enum):
     ZVEI = "zvei"
     FAX = "fax"
     SDS = "sds"
