@@ -27,13 +27,9 @@ class RedisMB:
         self.p = self.r.pubsub(ignore_subscribe_messages=True)
         self.subthread = None
 
-        self.logger.info(
-            "Connecting to Redis DB "
-            "on {}:{} DB: {}".format(host, port, db))
+        self.logger.info("Connecting to Redis DB on {}:{} DB: {}".format(host, port, db))
         self.r.ping()
-        self.logger.info(
-            "Connected successfully to Redis DB "
-            "on {}:{} DB: {}".format(host, port, db))
+        self.logger.info("Connected successfully to Redis DB on {}:{} DB: {}".format(host, port, db))
 
     def _publish_message(self, queue, message):
         messageToSend = {'uuid': str(uuid.uuid1()),
