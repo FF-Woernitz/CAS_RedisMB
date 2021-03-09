@@ -1,7 +1,4 @@
-from enum import Enum
-
-
-class LogSeverity(Enum):
+class LogSeverity:
     TRACE = 0
     DEBUG = 1
     INFO = 2
@@ -10,7 +7,7 @@ class LogSeverity(Enum):
     FATAL = 5
 
 
-class AlertType(Enum):
+class AlertType:
     ZVEI = "zvei"
     FAX = "fax"
     SDS = "sds"
