@@ -33,7 +33,7 @@ class RedisMB:
 
     def _publish_message(self, queue, message):
         messageToSend = {'uuid': str(uuid.uuid1()),
-                         'type': queue,
+                         'channel': queue,
                          'message': message}
         messageToSend = json.dumps(messageToSend,
                                    separators=(',', ':'),
