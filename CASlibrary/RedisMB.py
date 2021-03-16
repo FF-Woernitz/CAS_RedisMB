@@ -60,14 +60,14 @@ class RedisMB:
     def test(self, messagetype, data):
         self._publish_message("test", {"type": messagetype, "data": data})
 
-    def subscribeToType(self, type, callback):
+    def subscribeToType(self, type, callback, daemon=False):
         self.p.subscribe(**{type: callback})
         if self.subthread is None:
-            self.subthread = self.p.run_in_thread(sleep_time=0.01)
+            self.subthread = self.p.run_in_thread(sleep_time=0.01, daemon=daemon)
         return self.subthread
 
-    def psubscribeToType(self, pattern, callback):
+    def psubscribeToType(self, pattern, callback, daemon=False):
         self.p.psubscribe(**{pattern: callback})
         if self.subthread is None:
-            self.subthread = self.p.run_in_thread(sleep_time=0.01)
+            self.subthread = self.p.run_in_thread(sleep_time=0.01, daemon=daemon)
         return self.subthread
