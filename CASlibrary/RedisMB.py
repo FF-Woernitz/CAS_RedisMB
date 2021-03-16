@@ -46,6 +46,9 @@ class RedisMB:
         return json.loads(message['data'])
 
     def exit(self):
+        if self.subthread is not None:
+            self.subthread.stop()
+        self.p.close()
         self.r.close()
 
     def input(self, messagetype, data):
