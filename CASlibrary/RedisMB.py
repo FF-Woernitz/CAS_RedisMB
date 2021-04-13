@@ -60,8 +60,8 @@ class RedisMB:
     def error(self, messagetype, data):
         self._publish_message("error", {"type": messagetype, "data": data})
 
-    def test(self, messagetype, data):
-        self._publish_message("test", {"type": messagetype, "data": data})
+    def action(self, action, data):
+        self._publish_message("action", {"action": action, "data": data})
 
     def subscribeToType(self, type, callback, daemon=False):
         self.p.subscribe(**{type: callback})
