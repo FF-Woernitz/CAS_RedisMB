@@ -1,8 +1,9 @@
 import os.path
-import time
 import json
+import time
 
 from . import Logger
+
 
 class Config:
     def __init__(self):
