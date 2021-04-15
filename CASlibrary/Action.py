@@ -7,7 +7,7 @@ def checkIfMessageIsForAction(logger, config, message, action_name):
             logger.debug("Action {}, does match the requested key".format(configActionKey))
             if configAction["type"].upper() == action_name.upper():
                 logger.info("Executing action {}".format(configAction["name"]))
-                return True
+                return configAction
     return False
 
 
