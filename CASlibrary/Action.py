@@ -10,3 +10,7 @@ def checkIfMessageIsForAction(logger, config, message, action_name):
                 return True
     return False
 
+
+def templateData(logger, config, data, action_data):
+    # Not implemented yet
+    return data
